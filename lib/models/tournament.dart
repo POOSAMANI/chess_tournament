@@ -32,20 +32,4 @@ class Tournament {
       endDate: map['endDate'] as String,
     );
   }
-
-  Tournament copyWith({
-    int? id,
-    String? name,
-    String? location,
-    String? startDate,
-    String? endDate,
-  }) {
-    return Tournament(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      location: location ?? this.location,
-      startDate: startDate ?? this.startDate,
-      endDate: endDate ?? this.endDate,
-    );
-  }
 }

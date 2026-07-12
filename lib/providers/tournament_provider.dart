@@ -8,24 +8,24 @@ class TournamentNotifier extends StateNotifier<List<Tournament>> {
     loadTournaments();
   }
 
-  final DatabaseHelper database = DatabaseHelper.instance;
+  final DatabaseHelper _database = DatabaseHelper.instance;
 
   Future<void> loadTournaments() async {
-    state = await database.getTournaments();
+    state = await _database.getTournaments();
   }
 
   Future<void> addTournament(Tournament tournament) async {
-    await database.insertTournament(tournament);
+    await _database.insertTournament(tournament);
     await loadTournaments();
   }
 
   Future<void> updateTournament(Tournament tournament) async {
-    await database.updateTournament(tournament);
+    await _database.updateTournament(tournament);
     await loadTournaments();
   }
 
   Future<void> deleteTournament(int id) async {
-    await database.deleteTournament(id);
+    await _database.deleteTournament(id);
     await loadTournaments();
   }
 }

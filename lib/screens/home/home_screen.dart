@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/dashboard_card.dart';
+import '../match/match_screen.dart';
 import '../player/player_list_screen.dart';
+import '../ranking/ranking_screen.dart';
 import '../tournament/tournament_list_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Chess Tournament Manager"),
+        title: const Text("♟ Chess Tournament Arena"),
         centerTitle: true,
       ),
       body: Padding(
@@ -21,7 +24,7 @@ class HomeScreen extends StatelessWidget {
 
             const Icon(Icons.sports_esports, size: 80, color: Colors.indigo),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
 
             const Center(
               child: Text(
@@ -33,52 +36,61 @@ class HomeScreen extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            _menuCard(
-              context,
+            DashboardCard(
               title: "Player Management",
               subtitle: "Add, Edit and Delete Players",
               icon: Icons.people,
               color: Colors.blue,
-              page: const PlayerListScreen(),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const PlayerListScreen()),
+                );
+              },
             ),
 
-            const SizedBox(height: 15),
-
-            _menuCard(
-              context,
+            DashboardCard(
               title: "Tournament Management",
-              subtitle: "Create Chess Tournaments",
+              subtitle: "Create and Manage Tournaments",
               icon: Icons.emoji_events,
               color: Colors.orange,
-              page: const TournamentListScreen(),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const TournamentListScreen(),
+                  ),
+                );
+              },
+            ),
+
+            DashboardCard(
+              title: "Start Tournament",
+              subtitle: "Generate Random Matches",
+              icon: Icons.casino,
+              color: Colors.green,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const MatchScreen()),
+                );
+              },
+            ),
+
+            DashboardCard(
+              title: "Rankings",
+              subtitle: "View Tournament Winners",
+              icon: Icons.emoji_events_outlined,
+              color: Colors.purple,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const RankingScreen()),
+                );
+              },
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _menuCard(
-    BuildContext context, {
-    required String title,
-    required String subtitle,
-    required IconData icon,
-    required Color color,
-    required Widget page,
-  }) {
-    return Card(
-      elevation: 5,
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: color,
-          child: Icon(icon, color: Colors.white),
-        ),
-        title: Text(title),
-        subtitle: Text(subtitle),
-        trailing: const Icon(Icons.arrow_forward_ios),
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (_) => page));
-        },
       ),
     );
   }
