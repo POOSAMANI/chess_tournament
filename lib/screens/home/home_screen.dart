@@ -9,6 +9,10 @@ import '../tournament/tournament_list_screen.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  // Temporary default tournament ID.
+  // Replace this with the selected tournament ID later.
+  static const int defaultTournamentId = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +76,10 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const MatchScreen()),
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        const MatchScreen(tournamentId: defaultTournamentId),
+                  ),
                 );
               },
             ),
@@ -85,7 +92,10 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const RankingScreen()),
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        const RankingScreen(tournamentId: defaultTournamentId),
+                  ),
                 );
               },
             ),

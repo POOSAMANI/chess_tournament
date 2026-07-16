@@ -4,9 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'database/database_helper.dart';
 import 'screens/home/home_screen.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Initialize the database before starting the app.
   await DatabaseHelper.instance.database;
 
   runApp(const ProviderScope(child: ChessTournamentApp()));

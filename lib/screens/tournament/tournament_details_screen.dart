@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../models/tournament.dart';
+import '../match/match_screen.dart';
+import '../ranking/ranking_screen.dart';
 import 'manage_players_screen.dart';
 
 class TournamentDetailsScreen extends StatelessWidget {
@@ -11,16 +13,12 @@ class TournamentDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tournament Details"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text(tournament.name), centerTitle: true),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Tournament Information Card
             Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
@@ -39,9 +37,7 @@ class TournamentDetailsScreen extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-
                     const SizedBox(height: 20),
-
                     Text(
                       tournament.name,
                       textAlign: TextAlign.center,
@@ -50,7 +46,6 @@ class TournamentDetailsScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                     const SizedBox(height: 20),
 
                     ListTile(
@@ -60,7 +55,7 @@ class TournamentDetailsScreen extends StatelessWidget {
                     ),
 
                     ListTile(
-                      leading: const Icon(Icons.calendar_month),
+                      leading: const Icon(Icons.calendar_today),
                       title: const Text("Start Date"),
                       subtitle: Text(tournament.startDate),
                     ),
@@ -75,9 +70,8 @@ class TournamentDetailsScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 25),
+            const SizedBox(height: 20),
 
-            // Manage Players
             Card(
               elevation: 3,
               child: ListTile(
@@ -86,10 +80,9 @@ class TournamentDetailsScreen extends StatelessWidget {
                   child: Icon(Icons.people, color: Colors.white),
                 ),
                 title: const Text("Tournament Players"),
-                subtitle: const Text(
-                  "Manage players participating in this tournament",
-                ),
+                subtitle: const Text("Assign players to this tournament"),
                 trailing: ElevatedButton(
+                  child: const Text("Manage"),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -99,14 +92,12 @@ class TournamentDetailsScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text("Manage"),
                 ),
               ),
             ),
 
             const SizedBox(height: 15),
 
-            // Generate Tournament
             Card(
               elevation: 3,
               child: ListTile(
@@ -115,25 +106,24 @@ class TournamentDetailsScreen extends StatelessWidget {
                   child: Icon(Icons.casino, color: Colors.white),
                 ),
                 title: const Text("Generate Tournament"),
-                subtitle: const Text(
-                  "Randomly pair players and create matches",
-                ),
+                subtitle: const Text("Generate first round matches"),
                 trailing: ElevatedButton(
+                  child: const Text("Generate"),
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Tournament Generator Coming Soon 🚀"),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            MatchScreen(tournamentId: tournament.id!),
                       ),
                     );
                   },
-                  child: const Text("Generate"),
                 ),
               ),
             ),
 
             const SizedBox(height: 15),
 
-            // Ranking
             Card(
               elevation: 3,
               child: ListTile(
@@ -142,18 +132,18 @@ class TournamentDetailsScreen extends StatelessWidget {
                   child: Icon(Icons.leaderboard, color: Colors.white),
                 ),
                 title: const Text("Tournament Ranking"),
-                subtitle: const Text(
-                  "View Champion, Runner-up and Third Place",
-                ),
+                subtitle: const Text("View tournament champion"),
                 trailing: ElevatedButton(
+                  child: const Text("Ranking"),
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Ranking Module Coming Soon 🏆"),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            RankingScreen(tournamentId: tournament.id!),
                       ),
                     );
                   },
-                  child: const Text("Ranking"),
                 ),
               ),
             ),
@@ -169,9 +159,10 @@ class TournamentDetailsScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Tournament Engine Coming Soon 🚀"),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => MatchScreen(tournamentId: tournament.id!),
                     ),
                   );
                 },
